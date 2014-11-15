@@ -56,13 +56,15 @@ class window.Hand extends Backbone.Collection
     # create a newgame variable that creates a confirm alert
     if !didWin
       gameOverMsg = "You lost. Try not to get any tears on the keyboard."
+      window.chips = 1
     else
       gameOverMsg = "You won! Bathe in the tears of your vanquished enemies."
+      window.chips *= 2
     newGame = confirm gameOverMsg + "\n\n Play again?"
     # if newGame is true, then reset the game
     if newGame
       @trigger 'dealEmOut', @
-      window.gameOver = false;
+      window.gameOver = false
 
 
 
