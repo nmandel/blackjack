@@ -3,7 +3,10 @@ class window.CardView extends Backbone.View
 
   template: _.template '<%= rankName %> of <%= suitName %>'
 
-  initialize: -> @render()
+  initialize: ->
+    url: "url(img/cards/"+@model.rankName+"-"+suitName.toLowerCase()+".png)"
+    @css "background-image", @get url
+    @render()
 
   render: ->
     @$el.children().detach()

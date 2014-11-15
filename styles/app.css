@@ -9,6 +9,11 @@
 
 .covered {
   background-color: black;
+  background-image: url("img/card-back.png");
+  background-size: cover;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .hand {

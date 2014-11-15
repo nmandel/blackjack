@@ -15,8 +15,8 @@ class window.App extends Backbone.Model
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
 
-    @trigger 'newGame', @ # HERE IS THE ERROR! o.0
+    @trigger 'newGame', @
 
     window.view.remove()
     window.view = new AppView(model: new App()).$el.appendTo 'body'
-
+    # window.gameOver = false

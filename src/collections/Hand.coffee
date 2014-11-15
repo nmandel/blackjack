@@ -24,16 +24,18 @@ class window.Hand extends Backbone.Collection
         if @getScore() > 21
           @endgame(true)
 
-      #evalutate player and dealer score
 
-  stand: ->
-    # if hasAce and score is less than 12
-    #   return this.scores()[1]
-    # else return this.scores()[0]
-    if @scores()[1] <= 21
-      @trigger 'stand', @
-    else
-      @trigger 'change', @
+  # evalutate player and dealer score
+
+  # stand: ->
+  #   # if hasAce and score is less than 12
+  #   #   return this.scores()[1]
+  #   # else return this.scores()[0]
+  #   # if @scores()[1] <= 21
+  #   #   @trigger 'stand', @
+  #   # else
+  #   #   @trigger 'change', @
+  #   @getScore()
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
@@ -53,13 +55,16 @@ class window.Hand extends Backbone.Collection
     window.gameOver = true
     # create a newgame variable that creates a confirm alert
     if !didWin
-      gameOverMsg = "I'm not mad, just disappointed in your playing abilities."
+      gameOverMsg = "You lost. Try not to get any tears on the keyboard."
     else
-      gameOverMsg = "You win bitch!"
+      gameOverMsg = "You won! Bathe in the tears of your vanquished enemies."
     newGame = confirm gameOverMsg + "\n\n Play again?"
     # if newGame is true, then reset the game
     if newGame
       @trigger 'dealEmOut', @
+      window.gameOver = false;
+
+
 
 
 

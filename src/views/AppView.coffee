@@ -8,11 +8,11 @@ class window.AppView extends Backbone.View
   events:
     'click .hit-button': -> @model.get('playerHand').hit()
     'click .stand-button': ->
-      @model.get('playerHand').stand()
+      playerScore = @model.get('playerHand').getScore()
       @model.get('dealerHand').first().flip()
       @model.get('dealerHand').hit()
       # get player and dealer hand score, compare
-      playerScore = @model.get('playerHand').getScore()
+      # playerScore = @model.get('playerHand').getScore()
       dealerScore = @model.get('dealerHand').getScore()
       # alert the winner
       if !window.gameOver
