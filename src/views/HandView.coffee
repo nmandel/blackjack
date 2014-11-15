@@ -6,7 +6,6 @@ class window.HandView extends Backbone.View
   initialize: ->
     @collection.on 'add remove change', => @render()
     @collection.on 'stand', => @standRender()
-    #@collection.on 'dealerPlay', => @dealerHitRender()
     @render()
 
 
@@ -16,8 +15,6 @@ class window.HandView extends Backbone.View
     @$el.append @collection.map (card) ->
       new CardView(model: card).$el
     @$('.score').text @collection.scores()[0]
-    #@collection.get('score').set('score', parseInt(@$('.score').text))
-    console.log @collection.getScore()
 
   standRender: ->
     @$el.children().detach()
@@ -25,6 +22,4 @@ class window.HandView extends Backbone.View
     @$el.append @collection.map (card) ->
       new CardView(model: card).$el
     @$('.score').text @collection.scores()[1]
-    #@collection.get('score').set('score', parseInt(@$('.score').text))
-    console.log @collection.getScore()
 

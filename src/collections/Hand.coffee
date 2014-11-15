@@ -5,8 +5,10 @@ class window.Hand extends Backbone.Collection
 
   getScore: ->
     if @scores()[1] <= 21
+      @trigger('stand', @)
       @scores()[1]
     else
+      @trigger('change', @)
       @scores()[0]
 
   hit: ->
@@ -14,10 +16,14 @@ class window.Hand extends Backbone.Collection
       if @scores()[0] < 21
         @add(@deck.pop())
       if @scores()[0] > 21
-        alert 'busted!'
+        #@trigger('change', @)
+        @endgame(false)
     else
-      while @scores()[0] < 17
+      while @getScore() < 17
         @add(@deck.pop())
+        if @getScore() > 21
+          @endgame(true)
+
       #evalutate player and dealer score
 
   stand: ->
@@ -28,7 +34,6 @@ class window.Hand extends Backbone.Collection
       @trigger('stand', @)
     else
       @trigger('change', @)
-    @trigger('dealerPlay', @);
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
@@ -43,5 +48,13 @@ class window.Hand extends Backbone.Collection
     # Usually, that array contains one element. That is the only score.
     # when there is an ace, it offers you two scores - the original score, and score + 10.
     [@minScore(), @minScore() + 10 * @hasAce()]
+
+  endgame: (didWin) ->
+    window.gameOver = true
+    if !didWin
+      alert "I'm not mad, just disappointed in your playing abilities."
+    else
+      alert "You win bitch!"
+
 
 

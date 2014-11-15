@@ -11,17 +11,13 @@ class window.AppView extends Backbone.View
       @model.get('playerHand').stand()
       @model.get('dealerHand').first().flip()
       @model.get('dealerHand').hit()
+      # get player and dealer hand score, compare
       playerScore = @model.get('playerHand').getScore()
       dealerScore = @model.get('dealerHand').getScore()
-      if playerScore > dealerScore
-        alert "You win bitch!"
-      else
-        alert "I'm not mad, just disappointed in your playing abilities."
-      # get player and dealer hand score, compare
       # alert the winner
-      #playerScore = @model.get('playerHand')
-      #console.log playerScore
-      #if @model.get('playerHand').$('.score').text
+      if !window.gameOver
+        @model.get('playerHand').endgame(playerScore > dealerScore)
+        window.gameOver = false
 
   initialize: ->
     @render()
